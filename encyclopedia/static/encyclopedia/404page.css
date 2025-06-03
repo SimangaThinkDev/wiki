@@ -1,0 +1,15 @@
+img {
+    height: 40%;
+    width: 35%;
+    margin: auto;
+    padding-left: 33%;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+body {
+    background-color: black;
+}
