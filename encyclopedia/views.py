@@ -5,6 +5,12 @@ from markdown import markdown
 
 import logging
 from click import secho
+from django import forms
+import random
+
+class NewPage(forms.Form):
+    title    = forms.CharField( label="title" ) # We are going to use the label to access the title
+    textarea = forms.CharField( widget=forms.Textarea ) 
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -26,8 +32,27 @@ def entry( request, title ):
 def create_page( request ):
     logger = logging.getLogger(__name__)
     if request.method == "POST":
-        logger.info( "This works" )
-        secho( "This works", fg="green" )
+        secho( "<<<<<<<A post message was submitted>>>>>>>", fg="green" )
+        new_page = NewPage( request.POST ) # I think we will have to stick with naming this variable form
         
-    return render( request, "encyclopedia/create_page.html" )
+        if new_page.is_valid():
+            title    = new_page.cleaned_data[ "title" ]
+            textarea = new_page.cleaned_data[ "textarea" ] 
 
+            secho( f"Request has title -> { title }", fg="green" )
+            secho( f"Request has body -> \n{ textarea }", fg="green" )
+            
+            util.save_entry( title, textarea )
+            
+    return render( request, "encyclopedia/create_page.html", {
+        "form" : NewPage(),
+    } )
+
+def random_page( request ):
+    
+    page_to_render = random.choice( util.list_entries() )
+    
+    return render( request, "encyclopedia/pages.html", {
+        "title"   : page_to_render.upper(),
+        "content" : markdown( util.get_entry( page_to_render ) ),
+        })

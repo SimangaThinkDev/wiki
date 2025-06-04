@@ -10,8 +10,11 @@ Create Your Own Page
 
 <div>
     <form action="{% url 'encyclopedia:create_page' %}" method="post">
-        <input type="text" placeholder="Title?">
-        <textarea name="description" id="txtarea"></textarea>
+        {% csrf_token %}
+        {{ form }}
+        <!-- <input type="text" placeholder="Title?">
+        <textarea name="description" id="txtarea"></textarea> -->
+        <input type="submit">
     </form>
 </div>
 
