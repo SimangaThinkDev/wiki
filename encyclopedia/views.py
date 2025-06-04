@@ -39,8 +39,13 @@ def create_page( request ):
             title    = new_page.cleaned_data[ "title" ]
             textarea = new_page.cleaned_data[ "textarea" ] 
 
+            # DEBUG
             secho( f"Request has title -> { title }", fg="green" )
             secho( f"Request has body -> \n{ textarea }", fg="green" )
+            
+            for page in util.list_entries():
+                if page.lower() == title.lower():
+                    return render( request, "encyclopedia/page_exists.html" )
             
             util.save_entry( title, textarea )
             

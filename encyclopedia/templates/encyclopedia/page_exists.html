@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="{% static 'encyclopedia/wiki-logo.png' %}">
+        <title>Not Found</title>
+        <link rel="stylesheet" href="{% static 'encyclopedia/404page.css' %}">
+    </head>
+
+    <body>
+        <div>
+            <h1>Page Already Exists, Click Picture Below To Retry</h1>
+        </div>
+        <div>
+            <a href="{% url 'encyclopedia:create_page' %}">
+                <img src="{% static 'encyclopedia/404cat.jpg' %}" alt="404cat">
+            </a>
+        </div>
+    </body>
+</html>
