@@ -47,7 +47,8 @@ def create_page( request ):
                 if page.lower() == title.lower():
                     return render( request, "encyclopedia/page_exists.html" )
             
-            util.save_entry( title, textarea )
+            util.save_entry( title,"# " + title + "\n" + textarea )
+            return render( request, "encyclopedia/index.html" )
             
     return render( request, "encyclopedia/create_page.html", {
         "form" : NewPage(),
