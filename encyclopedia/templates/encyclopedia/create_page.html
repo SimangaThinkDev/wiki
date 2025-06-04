@@ -1,0 +1,18 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+
+Create Your Own Page
+
+{% endblock %}
+
+{% block body %}
+
+<div>
+    <form action="{% url 'encyclopedia:create_page' %}" method="post">
+        <input type="text" placeholder="Title?">
+        <textarea name="description" id="txtarea"></textarea>
+    </form>
+</div>
+
+{% endblock %}
