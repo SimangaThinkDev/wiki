@@ -8,4 +8,10 @@
 
 {{ content | safe }}
 
+    <form action="{% url 'encyclopedia:edit' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="entry" value="{{ title }}">
+        <input type="submit" value="edit" class="btn btn-danger">
+    </form>
+
 {% endblock %}
