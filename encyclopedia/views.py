@@ -83,7 +83,7 @@ def search( request ):
                               <h3> {q.upper()} not available in this encyclopedia"
             } )
 
-        if len(found) == 1 :
+        if len(found) == 1 and q.lower() == found[0].lower():
             return render( request, "encyclopedia/pages.html", {
                         "title"   : q.upper(),
                         "content" : markdown( util.get_entry( found[0] ) ),
